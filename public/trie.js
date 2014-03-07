@@ -1,29 +1,36 @@
 Trie = function(){
   this.characters = {};
+  this.isWord = undefined;
 };
 
-Trie.prototype.learn = function(word, index){
-  // This function should add the given word,
-  // starting from the given index,
-  // to this Trie.
+var rootTrie = new Trie();
+Trie.prototype.learn = function(word, index) {
+  if (typeof index === "undefined" || index === null) {
+    index = 0;
+  }
 
-  // It will be recursive.  It will tell
-  // the correct child of this Trie to learn the word
-  // starting from a later index.
-
-  // Consider what the learn function should do
-  // when it reaches the end of the word?
-  // A word does not necessarily end at a leaf.
-  // You must mark nodes which are the ends of words,
-  // so that the words can be reconstructed later.
+  if (index === word.length) {
+    this.isWord = true;
+  } else {
+    if (this.characters[word[index]] !== undefined) {
+      return this.characters[word[index]].learn(word, index + 1);
+    } else {
+      this.characters[word[index]] = new Trie();
+      return this.characters[word[index]].learn(word, index + 1);
+    }
+  }
 };
 
+var rootTrie = new Trie();
 Trie.prototype.getWords = function(words, currentWord){
+
+};
+
+// the get words function:
   // This function will return all the words which are
   // contained in this Trie.
   // it will use currentWord as a prefix,
   // since a Trie doesn't know about its parents.
-};
 
 Trie.prototype.find = function(word, index){
   // This function will return the node in the trie
@@ -37,3 +44,24 @@ Trie.prototype.autoComplete = function(prefix){
   // for a given prefix.
   // It should use find and getWords.
 };
+
+
+
+
+
+
+
+// the learn function:
+  // This function should add the given word,
+  // starting from the given index,
+  // to this Trie.
+
+  // It will be recursive.  It will tell
+  // the correct child of this Trie to learn the word
+  // starting from a later index.
+
+  // Consider what the learn function should do
+  // when it reaches the end of the word?
+  // A word does not necessarily end at a leaf.
+  // You must mark nodes which are the ends of words,
+  // so that the words can be reconstructed later.

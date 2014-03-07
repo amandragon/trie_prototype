@@ -15,6 +15,20 @@ window.App = {
 
   }
 };
+
+// routes
+
+App.Routers.Main = Backbone.Router.extend({
+  routes: {
+    "(/*)": "index"
+  },
+  index: function(){
+      alert("Hello World");
+    }
+  });
+
+// end routes
+
 $(document).ready(function(){
   App.initialize();
 });
