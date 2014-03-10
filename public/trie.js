@@ -30,23 +30,49 @@ currentWord = currentWord || '';
   }
 
   for (var key in this.characters) {
-    newWord = currentWord + key;
-    this.characters[key].getWords(words, newWord);
+    newWrd = currentWord + key;
+    this.characters[key].getWords(words, newWrd);
   }
   return words;
 };
 
 Trie.prototype.find = function(word, index){
+  if (typeof index === "undefined" || index === null){
+    index = 0;
+  }
+
+   if (index === word.length) {
+    return this;
+  }
+    if (this.characters[word[index]] !== undefined) {
+    return this.characters[word[index]].find(word, index + 1);
+  } else {
+    return false;
+  }
 
 };
 
 Trie.prototype.autoComplete = function(prefix){
+  if (this.find(prefix) === false) {
+    return [];
+  } else {
+    var result = this.find(prefix).getWords();
+    var answer = [];
+    for (var i = 0; i < result.length; i++) {
+      word = prefix.concat(result[i]);
+      answer.push(word);
+    }
+
+    return answer;
+  }
+
+};
+
+// the autocomplete function
+
   // This function will return all completions 
   // for a given prefix.
   // It should use find and getWords.
-};
-
-
 
 
 // the get words function:
