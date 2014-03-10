@@ -22,14 +22,23 @@ App.Routers.Main = Backbone.Router.extend({
   routes: {
     "(/*)": "index"
   },
-  index: function(){
-      alert("Hello World");
-    }
-  });
+  index: function() {
+    $(function() {
+      $('#query').on('input', function() {
+        var query = $('#query').val();
+        $('#results').empty();
+        resulting_array = App.autocompleter.complete(query);
+        _.each(resulting_array, function(item) {
+          $('#results').append('<li>' + item + '</li>');
+        });
+      });
+    });
+  }
+});
 
 // end routes
 
-$(document).ready(function(){
+
+$(function() {
   App.initialize();
 });
-
