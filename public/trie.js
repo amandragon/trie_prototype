@@ -40,12 +40,10 @@ Trie.prototype.find = function(word, index){
   if (typeof index === "undefined" || index === null){
     index = 0;
   }
-
-   if (index === word.length) {
-    return this;
-  }
     if (this.characters[word[index]] !== undefined) {
     return this.characters[word[index]].find(word, index + 1);
+    } else if (index === word.length) {
+      return this;
   } else {
     return false;
   }
@@ -58,9 +56,9 @@ Trie.prototype.autoComplete = function(prefix){
   } else {
     var result = this.find(prefix).getWords();
     var answer = [];
-    for (var i = 0; i < result.length; i++) {
+    for (var i = 0; i < result.length; i ++) {
       word = prefix.concat(result[i]);
-      answer.push(word);
+      answer.push(word); 
     }
 
     return answer;
