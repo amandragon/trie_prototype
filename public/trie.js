@@ -21,22 +21,23 @@ Trie.prototype.learn = function(word, index) {
   }
 };
 
-var rootTrie = new Trie();
 Trie.prototype.getWords = function(words, currentWord){
+currentWord = currentWord || '';
+  words = words || [];
 
+  if (this.isWord === true) {
+    words.push(currentWord);
+  }
+
+  for (var key in this.characters) {
+    newWord = currentWord + key;
+    this.characters[key].getWords(words, newWord);
+  }
+  return words;
 };
 
-// the get words function:
-  // This function will return all the words which are
-  // contained in this Trie.
-  // it will use currentWord as a prefix,
-  // since a Trie doesn't know about its parents.
-
 Trie.prototype.find = function(word, index){
-  // This function will return the node in the trie
-  // which corresponds to the end of the passed in word.
 
-  // Be sure to consider what happens if the word is not in this Trie.
 };
 
 Trie.prototype.autoComplete = function(prefix){
@@ -48,8 +49,17 @@ Trie.prototype.autoComplete = function(prefix){
 
 
 
+// the get words function:
+  // This function will return all the words which are
+  // contained in this Trie.
+  // it will use currentWord as a prefix,
+  // since a Trie doesn't know about its parents.
 
+// the find function
+  // This function will return the node in the trie
+  // which corresponds to the end of the passed in word.
 
+  // Be sure to consider what happens if the word is not in this Trie.
 
 // the learn function:
   // This function should add the given word,
