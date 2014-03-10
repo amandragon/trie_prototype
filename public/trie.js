@@ -41,7 +41,7 @@ Trie.prototype.find = function(word, index){
     index = 0;
   }
     if (this.characters[word[index]] !== undefined) {
-    return this.characters[word[index]].find(word, index + 1);
+    return (this.characters[word[index]]).find(word, index + 1);
     } else if (index === word.length) {
       return this;
   } else {

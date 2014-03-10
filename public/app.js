@@ -10,7 +10,7 @@ window.App = {
     App.autocompleter = new Autocompleter();
     var ws = new WebSocket('ws://' + window.location.host + window.location.pathname);
     ws.onmessage = function(m) { 
-      autocompleter.add(m.data); 
+      App.autocompleter.add(m.data);
     };
 
   }
